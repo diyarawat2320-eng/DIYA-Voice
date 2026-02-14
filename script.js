@@ -6,7 +6,9 @@
 (function () {
     'use strict';
 
-    const API_BASE = 'http://localhost:5000/api';
+    // Auto-detect: local dev or Vercel deployment
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const API_BASE = isLocal ? 'http://localhost:5000/api' : '/api';
 
     // ========== DOM ==========
     const $ = s => document.querySelector(s);
@@ -446,6 +448,9 @@
                         toast(`🎵 Playing: ${data.data.title}`, 'success');
                     } else if (data.action === 'play_music' && data.data?.fallback) {
                         toast('🎵 Opening YouTube...', 'info');
+                    } else if (data.action === 'open_website' && data.data?.url) {
+                        window.open(data.data.url, '_blank');
+                        toast(`🌐 Opening ${data.data.name || 'website'}...`, 'info');
                     }
                     return;
                 }
