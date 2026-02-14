@@ -3,43 +3,36 @@
         {
             "src": "api/index.py",
             "use": "@vercel/python"
-        },
-        {
-            "src": "index.html",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "style.css",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "script.js",
-            "use": "@vercel/static"
         }
     ],
-    "rewrites": [
+    "routes": [
         {
-            "source": "/api/(.*)",
-            "destination": "/api/index"
-        }
-    ],
-    "headers": [
+            "src": "/api/(.*)",
+            "dest": "/api/index.py"
+        },
         {
-            "source": "/api/(.*)",
-            "headers": [
-                {
-                    "key": "Access-Control-Allow-Origin",
-                    "value": "*"
-                },
-                {
-                    "key": "Access-Control-Allow-Methods",
-                    "value": "GET, POST, PUT, DELETE, OPTIONS"
-                },
-                {
-                    "key": "Access-Control-Allow-Headers",
-                    "value": "Content-Type"
-                }
-            ]
+            "src": "/favicon.ico",
+            "dest": "/api/index.py"
+        },
+        {
+            "src": "/(.*\\.css)",
+            "dest": "/$1"
+        },
+        {
+            "src": "/(.*\\.js)",
+            "dest": "/$1"
+        },
+        {
+            "src": "/(.*\\.html)",
+            "dest": "/$1"
+        },
+        {
+            "src": "/(.*\\.png|.*\\.jpg|.*\\.svg|.*\\.ico)",
+            "dest": "/$1"
+        },
+        {
+            "src": "/",
+            "dest": "/index.html"
         }
     ]
 }
