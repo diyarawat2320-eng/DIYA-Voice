@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Diya — Your premium AI voice assistant with weather, music, search, notes, and intelligent conversation.">
+    <title>Diya — AI Voice Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-gradient"></div>
+    <div class="bg-mesh"></div>
+    <div class="bg-particles" id="particles"></div>
+
+    <!-- Main App -->
+    <div class="app-container">
+
+        <!-- Header -->
+        <header class="app-header" id="appHeader">
+            <div class="logo">
+                <div class="logo-icon" id="logoIcon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                        <line x1="12" y1="19" x2="12" y2="23" />
+                        <line x1="8" y1="23" x2="16" y2="23" />
+                    </svg>
+                </div>
+                <div class="logo-info">
+                    <span class="logo-text">Diya</span>
+                    <span class="logo-sub" id="connectionStatus">Connecting...</span>
+                </div>
+                <span class="logo-badge">AI</span>
+            </div>
+            <div class="header-center">
+                <div class="live-clock" id="liveClock"></div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-icon" id="notesQuickBtn" title="My Notes">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                    </svg>
+                </button>
+                <button class="btn-icon" id="settingsBtn" title="Settings">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 0 1 0 4h-.09c-.66.003-1.25.396-1.51 1z" />
+                    </svg>
+                </button>
+                <button class="btn-icon" id="themeToggle" title="Toggle Theme">
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" style="display:none">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="1" x2="12" y2="3" />
+                        <line x1="12" y1="21" x2="12" y2="23" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                        <line x1="1" y1="12" x2="3" y2="12" />
+                        <line x1="21" y1="12" x2="23" y2="12" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Left Panel -->
+            <aside class="features-panel" id="featuresPanel">
+                <h2 class="panel-title">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon
+                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                    Capabilities
+                </h2>
+                <div class="features-grid">
+                    <button class="feature-card" data-feature="weather" id="feat-weather">
+                        <div class="feature-icon"><span>🌦</span></div>
+                        <span class="feature-label">Weather</span>
+                    </button>
+                    <button class="feature-card" data-feature="time" id="feat-time">
+                        <div class="feature-icon"><span>⏰</span></div>
+                        <span class="feature-label">Time & Date</span>
+                    </button>
+                    <button class="feature-card" data-feature="search" id="feat-search">
+                        <div class="feature-icon"><span>🔍</span></div>
+                        <span class="feature-label">Web Search</span>
+                    </button>
+                    <button class="feature-card" data-feature="music" id="feat-music">
+                        <div class="feature-icon"><span>🎵</span></div>
+                        <span class="feature-label">Play Music</span>
+                    </button>
+                    <button class="feature-card" data-feature="calculate" id="feat-calc">
+                        <div class="feature-icon"><span>🧮</span></div>
+                        <span class="feature-label">Calculator</span>
+                    </button>
+                    <button class="feature-card" data-feature="website" id="feat-website">
+                        <div class="feature-icon"><span>🌐</span></div>
+                        <span class="feature-label">Open Sites</span>
+                    </button>
+                    <button class="feature-card" data-feature="notes" id="feat-notes">
+                        <div class="feature-icon"><span>📝</span></div>
+                        <span class="feature-label">Notes</span>
+                    </button>
+                    <button class="feature-card" data-feature="apps" id="feat-apps">
+                        <div class="feature-icon"><span>📂</span></div>
+                        <span class="feature-label">System Apps</span>
+                    </button>
+                    <button class="feature-card" data-feature="wiki" id="feat-wiki">
+                        <div class="feature-icon"><span>📖</span></div>
+                        <span class="feature-label">Wikipedia</span>
+                    </button>
+                    <button class="feature-card" data-feature="joke" id="feat-joke">
+                        <div class="feature-icon"><span>😂</span></div>
+                        <span class="feature-label">Tell Joke</span>
+                    </button>
+                    <button class="feature-card" data-feature="system" id="feat-system">
+                        <div class="feature-icon"><span>💻</span></div>
+                        <span class="feature-label">System Info</span>
+                    </button>
+                    <button class="feature-card" data-feature="help" id="feat-help">
+                        <div class="feature-icon"><span>❓</span></div>
+                        <span class="feature-label">Help</span>
+                    </button>
+                </div>
+
+                <div class="quick-commands">
+                    <h3 class="panel-subtitle">Quick Commands</h3>
+                    <div class="quick-chips" id="quickChips">
+                        <button class="chip" data-cmd="What's the weather today?">🌤 Weather</button>
+                        <button class="chip" data-cmd="What time is it?">🕐 Time</button>
+                        <button class="chip" data-cmd="Tell me a joke">😄 Joke</button>
+                        <button class="chip" data-cmd="Open YouTube">▶ YouTube</button>
+                        <button class="chip" data-cmd="Play relaxing music">🎶 Music</button>
+                        <button class="chip" data-cmd="What can you do?">💡 Help</button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center: Voice Hub -->
+            <section class="voice-section">
+
+                <!-- Greeting Banner -->
+                <div class="greeting-banner" id="greetingBanner">
+                    <h1 class="greeting-text" id="greetingText"></h1>
+                    <p class="greeting-sub" id="greetingSub"></p>
+                </div>
+
+                <!-- Status -->
+                <div class="status-badge" id="statusBadge">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span class="status-label" id="statusText">Initializing...</span>
+                </div>
+
+                <!-- Orb -->
+                <div class="orb-wrapper">
+                    <div class="orb-container" id="orbContainer">
+                        <div class="orb-glow" id="orbGlow"></div>
+                        <div class="orb-ring orb-ring-1"></div>
+                        <div class="orb-ring orb-ring-2"></div>
+                        <div class="orb-ring orb-ring-3"></div>
+                        <div class="orb-core" id="orbCore">
+                            <svg class="mic-icon" width="36" height="36" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                                <line x1="12" y1="19" x2="12" y2="23" />
+                                <line x1="8" y1="23" x2="16" y2="23" />
+                            </svg>
+                            <svg class="stop-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"
+                                style="display:none">
+                                <rect x="6" y="6" width="12" height="12" rx="2" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="orb-hint" id="orbHint">Tap to speak</p>
+                </div>
+
+                <!-- Waveform -->
+                <div class="waveform" id="waveform">
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                </div>
+
+                <!-- Transcript -->
+                <div class="transcript-box" id="transcriptBox">
+                    <div class="transcript-header">
+                        <span class="transcript-avatar">🗣</span>
+                        <span class="transcript-label">You</span>
+                    </div>
+                    <p class="transcript-text" id="transcriptText"></p>
+                </div>
+
+                <!-- Response -->
+                <div class="response-box" id="responseBox">
+                    <div class="response-header">
+                        <span class="response-avatar">✨</span>
+                        <span class="response-label" id="responseLabel">Diya</span>
+                    </div>
+                    <p class="response-text" id="responseText"></p>
+                    <div class="typing-indicator" id="typingIndicator" style="display:none">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+
+                <!-- Suggestion Chips -->
+                <div class="suggestion-chips" id="suggestionChips"></div>
+
+                <!-- Text Input -->
+                <div class="text-input-area">
+                    <div class="input-wrapper">
+                        <input type="text" id="textInput" placeholder="Type a command or question..."
+                            autocomplete="off">
+                        <button class="voice-input-btn" id="voiceInputBtn" title="Voice Input">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <button class="send-btn" id="sendBtn" title="Send">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13" />
+                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Right Panel: Chat History -->
+            <aside class="history-panel" id="historyPanel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        </svg>
+                        Chat History
+                    </h2>
+                    <button class="btn-icon btn-sm" id="clearHistoryBtn" title="Clear History">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <div class="history-empty" id="historyEmpty">
+                        <div class="empty-icon">💬</div>
+                        <p>Start a conversation!</p>
+                        <small>Say "Hey Diya" or click the mic</small>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Notes Slide Panel -->
+    <div class="overlay" id="notesOverlay"></div>
+    <div class="slide-panel" id="notesPanel">
+        <div class="slide-panel-header">
+            <h2>📝 My Notes</h2>
+            <button class="btn-icon" id="closeNotesBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+        <div class="slide-panel-body" id="notesBody">
+            <p class="empty-state">No notes yet. Say "Take a note" to add one!</p>
+        </div>
+    </div>
+
+    <!-- Settings Slide Panel -->
+    <div class="overlay" id="settingsOverlay"></div>
+    <div class="slide-panel" id="settingsPanel">
+        <div class="slide-panel-header">
+            <h2>⚙️ Settings</h2>
+            <button class="btn-icon" id="closeSettingsBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+        <div class="slide-panel-body">
+            <div class="setting-group">
+                <label class="setting-label">Assistant Name</label>
+                <input type="text" id="assistantName" class="setting-input" value="Diya"
+                    placeholder="Name your assistant">
+            </div>
+            <div class="setting-group">
+                <label class="setting-label">Voice Speed</label>
+                <div class="range-row">
+                    <input type="range" id="voiceSpeed" min="0.5" max="2" step="0.1" value="1">
+                    <span class="range-val" id="voiceSpeedVal">1x</span>
+                </div>
+            </div>
+            <div class="setting-group">
+                <label class="setting-label">Voice Pitch</label>
+                <div class="range-row">
+                    <input type="range" id="voicePitch" min="0.5" max="2" step="0.1" value="1.2">
+                    <span class="range-val" id="voicePitchVal">1.2</span>
+                </div>
+            </div>
+            <div class="setting-group">
+                <label class="setting-label">Weather City</label>
+                <input type="text" id="weatherCity" class="setting-input" value="Delhi" placeholder="Enter city name">
+            </div>
+            <div class="setting-group">
+                <label class="setting-label">OpenWeatherMap API Key</label>
+                <input type="password" id="weatherApiKey" class="setting-input" placeholder="Enter API key">
+                <small class="setting-hint">Free key at <a href="https://openweathermap.org/api" target="_blank"
+                        rel="noopener">openweathermap.org</a></small>
+            </div>
+            <button class="primary-btn" id="saveSettingsBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Save Settings
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
